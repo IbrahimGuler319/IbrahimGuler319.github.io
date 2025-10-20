@@ -1,0 +1,125 @@
+/* Genel ayarlar */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: #1e1e2f;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: white;
+    text-align: center;
+    padding: 4rem 0 2rem 0;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+/* Navbar */
+nav {
+    background-color: #1e1e2f;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+    margin: 0;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #8f94fb;
+}
+
+/* Section */
+section {
+    margin: 3rem 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+}
+
+section.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Skill bars */
+.skill {
+    margin-bottom: 1rem;
+}
+
+.skill-bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skill-bar div {
+    height: 15px;
+    background: linear-gradient(90deg, #4e54c8, #8f94fb);
+    width: 0;
+    transition: width 2s ease-in-out;
+}
+
+section.appear .skill-bar div {
+    width: inherit;
+}
+
+/* Project box */
+.project {
+    background-color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Footer */
+footer {
+    background-color: #1e1e2f;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
