@@ -1,264 +1,455 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>İbrahim Güler | Computer Engineer</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tokat At - Eğlenceli Fotoğraf</title>
 <style>
-/* --- Genel Stil --- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  :root{
+    --bg:#0f1724; --card:#0b1220; --accent:#4cc9f0; --muted:#9aa8c3;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(180deg,#071022 0%, #081424 60%);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color:#e6f0fb;
+    padding:24px;
+  }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at center, #0a192f, #020c1b);
-  color: #e6f1ff;
-  overflow-x: hidden;
-  animation: fadeIn 2s ease-in;
-}
+  .wrap{
+    width:100%;
+    max-width:980px;
+    display:grid;
+    grid-template-columns: 1fr 360px;
+    gap:28px;
+    align-items:start;
+  }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+  /* SOLDAN FOTOĞRAF KARTI */
+  .photo-card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.04);
+    border-radius:14px;
+    padding:18px;
+    position:relative;
+    overflow:hidden;
+  }
 
-/* --- Header --- */
-header {
-  text-align: center;
-  padding: 60px 20px 30px;
-}
+  .frame{
+    width:100%;
+    aspect-ratio: 4/3;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.0));
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 -50px 80px rgba(0,0,0,0.2);
+    border: 1px solid rgba(76,201,240,0.06);
+  }
 
-header h1 {
-  font-size: 2.5rem;
-  color: #64ffda;
-  text-shadow: 0 0 10px rgba(100,255,218,0.5);
-  animation: glow 2s infinite alternate;
-}
-@keyframes glow {
-  from { text-shadow: 0 0 5px #64ffda; }
-  to { text-shadow: 0 0 20px #64ffda; }
-}
+  /* Resim kendisi */
+  #targetImage{
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    transition: transform 240ms cubic-bezier(.2,.8,.2,1), filter 240ms;
+    will-change: transform, filter;
+    display:block;
+    border-radius:6px;
+  }
 
-header p {
-  color: #8892b0;
-  font-size: 1.1rem;
-  margin-top: 10px;
-}
+  /* Tokat el svg (başlangıçta gizli) */
+  .hand{
+    position:absolute;
+    width:240px;
+    height:220px;
+    right:-260px;
+    top:30%;
+    transform-origin: 90% 50%;
+    pointer-events:none;
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,0.6));
+    opacity:0;
+  }
 
-/* --- Terminal Bölümü --- */
-.terminal {
-  max-width: 700px;
-  background: rgba(10,25,47,0.85);
-  border: 1px solid #64ffda;
-  border-radius: 10px;
-  margin: 40px auto;
-  overflow: hidden;
-  box-shadow: 0 0 30px rgba(100,255,218,0.15);
-  animation: slideUp 1.5s ease;
-}
+  /* slap animasyonu tetiklenince eklenen sınıf */
+  .slap .hand{
+    animation:hand-slap 520ms cubic-bezier(.1,.9,.2,1) forwards;
+    opacity:1;
+  }
 
-@keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
+  @keyframes hand-slap{
+    0% { transform: translateX(0) rotate(-12deg) scale(0.95); right:-260px; opacity:1; }
+    35% { right: 20px; transform: translateX(-10px) rotate(6deg) scale(1.05); }
+    60% { right: -40px; transform: translateX(10px) rotate(-6deg) scale(0.98); }
+    100% { right:-260px; transform: translateX(0) rotate(-12deg) scale(0.95); opacity:0; }
+  }
 
-.terminal-header {
-  background: rgba(100,255,218,0.1);
-  padding: 10px 15px;
-  display: flex;
-  gap: 8px;
-}
+  /* Fotoğrafın vurulma efektleri (kısa sallanma & blur) */
+  .slap #targetImage{
+    animation: img-hit 520ms cubic-bezier(.2,.8,.2,1);
+    filter: brightness(1.05) saturate(1.05);
+  }
+  @keyframes img-hit{
+    0% { transform: translateX(0) rotate(0) scale(1); }
+    20% { transform: translateX(-8px) rotate(-3deg) scale(1.02); }
+    40% { transform: translateX(10px) rotate(2deg) scale(1.01); }
+    60% { transform: translateX(-6px) rotate(-1deg) scale(1.005); }
+    100% { transform: translateX(0) rotate(0) scale(1); }
+  }
 
-.terminal-btn {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #64ffda;
-  opacity: 0.8;
-}
+  /* Sağdaki kontrol paneli */
+  .panel{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:14px;
+    padding:18px;
+    border:1px solid rgba(255,255,255,0.03);
+    min-height: 260px;
+  }
+  .panel h3{
+    margin:0 0 12px 0;
+    color:var(--accent);
+    font-size:1.05rem;
+  }
 
-.terminal-body {
-  padding: 25px 30px;
-  font-family: 'Courier New', monospace;
-  color: #64ffda;
-  min-height: 160px;
-}
+  .controls{ display:flex; gap:10px; flex-wrap:wrap }
+  .btn{
+    background:linear-gradient(180deg,var(--accent), #2fb6db);
+    color:#042028;
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow: 0 6px 18px rgba(47,182,219,0.18);
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s;
+  }
+  .btn:active{ transform: translateY(2px) }
+  .btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted); box-shadow:none }
 
-.terminal-line {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid #64ffda;
-  animation: typing 4s steps(40) 1s infinite, blink 0.8s step-end infinite;
-}
+  .meta{ margin-top:14px; color:var(--muted); font-size:0.92rem }
 
-@keyframes typing {
-  0%, 100% { width: 0; }
-  20%, 80% { width: 100%; }
-}
-@keyframes blink {
-  50% { border-color: transparent; }
-}
+  .count{
+    display:flex; align-items:center; gap:12px; margin-top:10px;
+    font-size:1.1rem; font-weight:700; color:#cfeffd;
+  }
 
-/* --- Projeler --- */
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  max-width: 1000px;
-  margin: 70px auto;
-  padding: 0 20px;
-}
+  /* Uçan emoji */
+  .emoji{
+    position:absolute;
+    font-size:36px;
+    pointer-events:none;
+    will-change: transform, opacity;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  }
 
-.project-card {
-  background: rgba(17,34,64,0.7);
-  border: 1px solid #233554;
-  border-radius: 12px;
-  padding: 25px;
-  text-align: left;
-  color: #ccd6f6;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
+  /* Konfeti (canvas) */
+  canvas#confetti{
+    position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:40;
+  }
 
-.project-card:hover {
-  transform: translateY(-10px);
-  border-color: #64ffda;
-  box-shadow: 0 0 25px rgba(100,255,218,0.3);
-}
+  /* Küçük not */
+  .hint{ font-size:0.85rem; color:var(--muted); margin-top:12px }
 
-.project-card h3 {
-  color: #64ffda;
-  margin-bottom: 10px;
-}
-
-.project-card p {
-  color: #a8b2d1;
-  font-size: 0.95rem;
-}
-
-/* --- İletişim --- */
-.contact {
-  text-align: center;
-  margin: 70px 0;
-}
-
-.contact a {
-  display: inline-block;
-  margin: 10px;
-  color: #64ffda;
-  text-decoration: none;
-  font-weight: bold;
-  position: relative;
-}
-
-.contact a::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  left: 0;
-  bottom: -4px;
-  background: #64ffda;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.contact a:hover::after {
-  transform: scaleX(1);
-}
-
-/* --- Footer --- */
-footer {
-  text-align: center;
-  color: #8892b0;
-  font-size: 0.85rem;
-  padding: 20px;
-  border-top: 1px solid #233554;
-}
-
-/* --- Arka plan hareketi --- */
-.bg-anim {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(rgba(100,255,218,0.05) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(100,255,218,0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  z-index: -1;
-  animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(50px, 50px); }
-}
+  /* Responsive */
+  @media (max-width:900px){
+    .wrap{ grid-template-columns:1fr; }
+    .panel{ order:2 }
+  }
 </style>
 </head>
 <body>
+<div class="wrap">
+  <!-- FOTO KART -->
+  <div class="photo-card" id="photoCard">
+    <div class="frame" id="frame">
+      <!-- Kullanıcının yüklediği resim buraya gelecek -->
+      <img id="targetImage" src="friend.jpg" alt="Fotoğraf yüklü değil" crossorigin="anonymous" />
+      <!-- Tokat elini SVG ile çiziyoruz (stil ve anim var) -->
+      <svg class="hand" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Basit el/avuç çizimi -->
+        <g transform="translate(0,10)">
+          <path d="M160 70c0 40-30 72-70 72-35 0-64-27-68-61 -1-9 6-18 15-19 6-1 10 2 15 6 6 5 13 7 21 7 6 0 15-2 21-8 6-6 9-13 16-19 7-6 18-6 25 0 12 10 26 15 25 22z" fill="#ffd9c7"/>
+          <path d="M40 30c-2-8 4-16 12-18 8-2 15 3 17 11l3 18" fill="#ffd9c7"/>
+          <path d="M68 20c5-12 18-17 30-12 6 3 10 8 12 14 4 12-1 26-13 30s-31 2-39-9c-3-4-3-10 0-18z" fill="#ffd9c7"/>
+          <!-- el gölgesi -->
+          <ellipse cx="95" cy="135" rx="70" ry="30" fill="rgba(0,0,0,0.25)"/>
+        </g>
+      </svg>
 
-<div class="bg-anim"></div>
-
-<header>
-  <h1>İbrahim Güler</h1>
-  <p>Computer Engineer | Mobile & Backend Developer</p>
-</header>
-
-<div class="terminal">
-  <div class="terminal-header">
-    <div class="terminal-btn"></div>
-    <div class="terminal-btn"></div>
-    <div class="terminal-btn"></div>
+      <!-- konfeti canvas -->
+      <canvas id="confetti"></canvas>
+    </div>
+    <div style="margin-top:14px; display:flex; gap:10px; align-items:center; justify-content:space-between;">
+      <div>
+        <label style="display:block; font-size:0.85rem; color:var(--muted)">Fotoğraf Yükle</label>
+        <input id="fileInput" type="file" accept="image/*" style="margin-top:6px; color:transparent" />
+        <p class="hint">Veya tarayıcıda aynı klasörde <code>friend.jpg</code> adında bir dosya bulundur.</p>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:0.82rem; color:var(--muted)">Toplam Tokat</div>
+        <div id="slapCount" class="count">0</div>
+      </div>
+    </div>
   </div>
-  <div class="terminal-body">
-    <div class="terminal-line">> Hello, I’m İbrahim. Passionate about software engineering and creative coding.</div>
-  </div>
+
+  <!-- KONTROL PANEL -->
+  <aside class="panel">
+    <h3>Tokat Paneli</h3>
+    <div class="controls">
+      <button id="slapBtn" class="btn">TOKAT AT! 👋</button>
+      <button id="burstBtn" class="btn ghost">Çılgın Mod (Konfeti)</button>
+      <button id="resetBtn" class="btn ghost">Sayaçı Sıfırla</button>
+    </div>
+
+    <div class="meta">
+      <div style="margin-top:12px;">
+        <strong>İpucu:</strong> Boşluk tuşuna (Space) da basabilirsin.
+      </div>
+
+      <div style="margin-top:12px;">
+        <label style="display:block; font-size:0.9rem; color:var(--muted)">Rastgele Tepkiler</label>
+        <div id="msgBox" style="margin-top:6px; color:#c9f2ff; font-weight:700">Hazır...</div>
+      </div>
+      <div style="margin-top:14px;">
+        <label style="display:block; font-size:0.9rem; color:var(--muted)">Ses Seviyesi</label>
+        <input id="vol" type="range" min="0" max="1" step="0.01" value="0.6" />
+      </div>
+    </div>
+  </aside>
 </div>
 
-<section class="projects">
-  <div class="project-card">
-    <h3>PetApp 🐾</h3>
-    <p>A mobile app built with Flutter, Go, Docker & Firebase for pet lovers.</p>
-  </div>
-  <div class="project-card">
-    <h3>QuestPin 🎯</h3>
-    <p>Location-based adventure game powered by Flutter and GPS tracking.</p>
-  </div>
-  <div class="project-card">
-    <h3>Chain Project 🔗</h3>
-    <p>Anonymous video chain platform encouraging social creativity.</p>
-  </div>
-</section>
-
-<section class="contact">
-  <h2>Contact</h2>
-  <a href="mailto:ibrahim@example.com">Email</a>
-  <a href="https://linkedin.com/in/ibrahimguler" target="_blank">LinkedIn</a>
-  <a href="https://github.com/IbrahimGuler319" target="_blank">GitHub</a>
-</section>
-
-<footer>
-  © 2025 İbrahim Güler. All rights reserved.
-</footer>
-
 <script>
-// Terminal yazısı sonsuz döngüyle değişsin
+/*
+  Tek dosyalık "Tokat At" sayfası
+  - Fotoğraf yükleme
+  - El animasyonu (SVG)
+  - Konfeti canvas
+  - Basit tokat sesi (WebAudio)
+  - Uçan emoji efektleri + rastgele mesajlar
+*/
+
+// DOM
+const fileInput = document.getElementById('fileInput');
+const img = document.getElementById('targetImage');
+const photoCard = document.getElementById('photoCard');
+const slapBtn = document.getElementById('slapBtn');
+const burstBtn = document.getElementById('burstBtn');
+const resetBtn = document.getElementById('resetBtn');
+const slapCountEl = document.getElementById('slapCount');
+const msgBox = document.getElementById('msgBox');
+const confettiCanvas = document.getElementById('confetti');
+const vol = document.getElementById('vol');
+
+let slapCount = 0;
+let confettiOn = false;
+
+// Foto yükleme
+fileInput.addEventListener('change', e=>{
+  const f = e.target.files && e.target.files[0];
+  if(!f) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(f);
+});
+
+// Rastgele mesajlar
 const messages = [
-  "> Hello, I’m İbrahim. Passionate about software engineering and creative coding.",
-  "> I build Flutter & Go powered mobile apps.",
-  "> Focused on performance, design, and innovation."
+  "Oof! 🤭", "Hahaha! 😂", "Burası acıyor mu? 😅", "Yumuşak dokunuş 🧴", "Güçlü vuruş 💥",
+  "Ha! İşte bu! 👏", "Yuh! Çok sert 😜", "Tekrar dene! 🔁", "Komik değil ama olsun 🤪", "GG WP ✨"
 ];
-let index = 0;
-const terminal = document.querySelector('.terminal-line');
 
-setInterval(() => {
-  terminal.textContent = messages[index];
-  index = (index + 1) % messages.length;
-}, 5000);
+// Uçan emoji üret
+function spawnEmoji(x,y){
+  const el = document.createElement('div');
+  el.className = 'emoji';
+  el.textContent = ['👋','💥','👏','🤣','🔥'][Math.floor(Math.random()*5)];
+  document.body.appendChild(el);
+  // başlangıç pozisyonu (yaklaşık elin değdiği nokta)
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+  requestAnimationFrame(()=>animateEmoji(el));
+  setTimeout(()=>el.remove(), 1600);
+}
+function animateEmoji(el){
+  const sx = parseFloat(el.style.left);
+  const sy = parseFloat(el.style.top);
+  const dx = sx + (Math.random()*160 - 80);
+  const dy = sy - (100 + Math.random()*100);
+  el.animate([
+    { transform: 'translate(0,0) scale(1)', opacity:1 },
+    { transform: `translate(${dx-sx}px, ${dy-sy}px) scale(1.4)`, opacity:0.02 }
+  ], { duration: 1200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+}
+
+// Basit konfeti (particle) sistemi
+const confettiCtx = confettiCanvas.getContext('2d');
+function resizeConfetti(){
+  confettiCanvas.width = confettiCanvas.clientWidth;
+  confettiCanvas.height = confettiCanvas.clientHeight;
+}
+window.addEventListener('resize', resizeConfetti);
+resizeConfetti();
+
+let particles = [];
+function startConfettiBurst(){
+  const w = confettiCanvas.width, h = confettiCanvas.height;
+  particles = [];
+  const count = 50 + Math.floor(Math.random()*80);
+  for(let i=0;i<count;i++){
+    particles.push({
+      x: Math.random()*w,
+      y: -20 - Math.random()*h*0.2,
+      vx: (Math.random()-0.5)*6,
+      vy: 2 + Math.random()*6,
+      size: 6 + Math.random()*10,
+      color: ['#4cc9f0','#48cae4','#3a86ff','#ade8f4','#ffd166'][Math.floor(Math.random()*5)]
+    });
+  }
+  confettiOn = true;
+  requestAnimationFrame(confettiLoop);
+}
+function confettiLoop(){
+  if(!confettiOn) return;
+  confettiCtx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+  for(let p of particles){
+    p.x += p.vx; p.y += p.vy;
+    p.vy += 0.08;
+    confettiCtx.fillStyle = p.color;
+    confettiCtx.fillRect(p.x, p.y, p.size, p.size*0.6);
+  }
+  // fade out when beyond
+  particles = particles.filter(p => p.y < confettiCanvas.height+40);
+  if(particles.length === 0){
+    confettiOn = false;
+    confettiCtx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+  } else {
+    requestAnimationFrame(confettiLoop);
+  }
+}
+
+// WebAudio ile tokat sesi oluştur
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx;
+function playSlapSound(volume = 0.6){
+  if(!AudioCtx) return;
+  if(!audioCtx) audioCtx = new AudioCtx();
+  const now = audioCtx.currentTime;
+
+  // kısa 'pop' için beyaz gürültü + percussive envelope
+  const bufferSize = audioCtx.sampleRate * 0.05;
+  const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = noiseBuffer.getChannelData(0);
+  for(let i=0;i<data.length;i++){
+    data[i] = (Math.random()*2 -1) * (1 - i/data.length); // fade out
+  }
+  const noise = audioCtx.createBufferSource();
+  noise.buffer = noiseBuffer;
+
+  const noiseGain = audioCtx.createGain();
+  noiseGain.gain.setValueAtTime(volume*0.9, now);
+  noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+  noise.connect(noiseGain).connect(audioCtx.destination);
+  noise.start(now); noise.stop(now + 0.06);
+
+  // ek bir kısa tonal click
+  const osc = audioCtx.createOscillator();
+  osc.type = 'square';
+  osc.frequency.setValueAtTime(800, now);
+  const g = audioCtx.createGain();
+  g.gain.setValueAtTime(volume*0.5, now);
+  g.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+  osc.connect(g).connect(audioCtx.destination);
+  osc.start(now); osc.stop(now + 0.06);
+}
+
+// Ana tokat fonksiyonu
+function doSlap(x = null, y = null){
+  // görsel sınıf ekle
+  photoCard.classList.add('slap');
+  // rastgele mesaj
+  msgBox.textContent = messages[Math.floor(Math.random()*messages.length)];
+  // sayı arttır
+  slapCount++;
+  slapCountEl.textContent = slapCount;
+  // uçan emoji
+  const rect = img.getBoundingClientRect();
+  const px = x !== null ? x : rect.left + rect.width*0.7;
+  const py = y !== null ? y : rect.top + rect.height*0.35;
+  spawnEmoji(px, py);
+  // konfeti
+  if(confettiOn === false && burstToggle) startConfettiBurst();
+
+  // ses
+  const v = parseFloat(vol.value || 0.6);
+  playSlapSound(v);
+
+  // kısa titreşim hissi için hafif vignette (ara)
+  setTimeout(()=> photoCard.classList.remove('slap'), 700);
+}
+
+// Butonlar
+let burstToggle = false;
+slapBtn.addEventListener('click', ()=>{
+  // elin vuracağı yaklaşık koordinatı hesapla
+  const r = img.getBoundingClientRect();
+  const tx = r.left + r.width*0.6;
+  const ty = r.top + r.height*0.35;
+  doSlap(tx, ty);
+});
+burstBtn.addEventListener('click', ()=>{
+  burstToggle = !burstToggle;
+  burstBtn.textContent = burstToggle ? 'Çılgın Mod Açık 🎉' : 'Çılgın Mod (Konfeti)';
+  burstBtn.classList.toggle('active', burstToggle);
+  if(burstToggle) startConfettiBurst();
+});
+resetBtn.addEventListener('click', ()=>{
+  slapCount = 0;
+  slapCountEl.textContent = slapCount;
+  msgBox.textContent = 'Sıfırlandı ✅';
+});
+
+// Space tuşu ile tetikleme
+window.addEventListener('keydown', e=>{
+  if(e.code === 'Space'){ e.preventDefault(); slapBtn.click(); }
+});
+
+// Sayfa yüklenince default mesaj
+msgBox.textContent = 'Fotoğrafı yükle ve "TOKAT AT" a bas!';
+
+// Mobilde tıklama alanı kolay olsun: fotoğrafa dokununca da tokat
+img.addEventListener('click', (ev)=>{
+  doSlap(ev.clientX, ev.clientY);
+});
+
+// Başlangıçta friend.jpg yoksa hafif opak placeholder uygula
+img.onerror = ()=> {
+  img.src = '';
+  img.alt = 'Fotoğraf bulunamadı — lütfen yükleyin';
+  img.style.opacity = 0.12;
+  img.style.background = 'linear-gradient(90deg, rgba(76,201,240,0.06), rgba(58,134,255,0.04))';
+};
+
+
+// Basit: resim yüklendikten sonra opaklığı normale çevir
+img.addEventListener('load', ()=> {
+  img.style.opacity = 1;
+  img.style.background = 'transparent';
+});
+
+// Çeşitli küçük görsel dokunuş: el animasyonunu tetiklediğimizde hand sınıfı SVG içinde yönetiliyor
+// (Bu kontrol CSS .slap sınıfına göre yapılıyor).
+
 </script>
-
 </body>
 </html>
