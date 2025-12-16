@@ -1,179 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ibrahim Guler — Developer Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İbrahim Güler — Flutter Developer</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap');
+    :root {
+      --bg: #0b0b0f;
+      --card: #14141b;
+      --accent: #00ff88;
+      --text: #eaeaea;
+      --muted: #9aa0a6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-      margin: 0;
-      background-color: #0a0a0a;
-      color: #00ff88;
-      font-family: 'Source Code Pro', monospace;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
     }
 
     header {
-      background: #000;
-      padding: 15px 25px;
-      border-bottom: 2px solid #00ff88;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11,11,15,0.9);
+      border-bottom: 1px solid var(--accent);
+      padding: 15px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      backdrop-filter: blur(8px);
     }
 
     header span {
-      color: #00ff88;
-      font-weight: 600;
+      font-family: 'Source Code Pro', monospace;
+      color: var(--accent);
     }
 
-    main {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding: 30px;
-      gap: 40px;
+    section {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    .intro {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      animation: fadeIn 1.5s ease-in-out;
+    h1, h2 {
+      color: var(--accent);
     }
 
-    .intro h1 {
+    h2 {
+      margin-bottom: 25px;
       font-size: 2rem;
-      margin: 0;
     }
 
-    .intro p {
-      margin-top: 10px;
-      font-size: 1.1rem;
-      color: #a0f0c0;
-    }
-
-    .console {
-      background: #111;
-      border: 1px solid #00ff88;
-      border-radius: 10px;
-      padding: 15px;
-      font-size: 0.9rem;
-      height: 220px;
-      overflow-y: auto;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .console p {
-      margin: 5px 0;
-      color: #00e676;
-    }
-
-    .projects {
-      grid-column: 1 / span 2;
+    /* HERO */
+    .hero {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+      min-height: 90vh;
     }
 
-    .card {
-      background: #111;
-      border: 1px solid #00ff88;
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .terminal {
+      background: #0f0f15;
+      border: 1px solid var(--accent);
       border-radius: 10px;
       padding: 20px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: 'Source Code Pro', monospace;
+      box-shadow: 0 0 20px rgba(0,255,136,0.2);
+      animation: float 4s ease-in-out infinite;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px #00ff88;
+    .terminal p {
+      margin: 6px 0;
+      color: #9dffcf;
     }
 
-    .card h3 {
-      color: #00ff88;
-      margin-top: 0;
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
+    /* SKILLS */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid #1f1f2b;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all .3s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px rgba(0,255,136,0.15);
+    }
+
+    .skill-card h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    /* PROJECTS */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 25px;
+    }
+
+    .project {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 25px;
+      border: 1px solid #1f1f2b;
+      transition: .3s;
+    }
+
+    .project:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 30px rgba(0,255,136,0.2);
+    }
+
+    .project h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .project span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
     footer {
       text-align: center;
-      padding: 20px;
-      border-top: 1px solid #00ff88;
-      background: #000;
+      padding: 40px;
+      border-top: 1px solid var(--accent);
+      color: var(--muted);
     }
 
     footer a {
-      color: #00ff88;
-      text-decoration: none;
+      color: var(--accent);
       margin: 0 10px;
-      transition: color 0.2s ease;
+      text-decoration: none;
     }
 
-    footer a:hover {
-      color: #a0f0c0;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <span>ibrahimguler@dev:~$</span>
-    <span>v1.0.0</span>
-  </header>
 
-  <main>
-    <section class="intro">
-      <h1>Hi, I'm <span style="color:#a0f0c0;">Ibrahim Guler</span> 👋</h1>
-      <p>Flutter Developer @ Virtus Ar-Ge<br>
-      Backend experience with Go, Docker, and PostgreSQL.<br>
-      Passionate about building clean, fast, and impactful mobile apps.</p>
-    </section>
+<header>
+  <span>ibrahimguler@portfolio:~$</span>
+  <span>Flutter Developer</span>
+</header>
 
-    <section class="console">
-      <p>> flutter run QuestPin</p>
-      <p>✓ Connected to device</p>
-      <p>> go run backend/main.go</p>
-      <p>✓ API server running on port 8080</p>
-      <p>> docker-compose up</p>
-      <p>✓ Containers started successfully</p>
-      <p>> database connected ✅</p>
-      <p>> system ready</p>
-    </section>
-
-    <section class="projects">
-      <div class="card">
-        <h3>🐾 PetApp</h3>
-        <p>A social pet-sharing platform built with Flutter, Go, Docker, and Firebase.</p>
-      </div>
-      <div class="card">
-        <h3>📹 The Chain</h3>
-        <p>A social experiment app combining 10 short anonymous videos into one private chain.</p>
-      </div>
-      <div class="card">
-        <h3>📍 QuestPin</h3>
-        <p>Map-based exploration app where users earn XP by walking and upgrade their avatar.</p>
-      </div>
-      <div class="card">
-        <h3>💡 Personal Blog</h3>
-        <p>Articles about software, design, and productivity — coming soon at <a href="#">ibrahimguler.online</a>.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 Ibrahim Guler — 
-      <a href="mailto:brhmguler319@gmail.com">Email</a> · 
-      <a href="https://www.linkedin.com/in/ibrahim-g%C3%BCler-087826269/" target="_blank">LinkedIn</a> · 
-      <a href="https://github.com/IbrahimGuler319" target="_blank">GitHub</a>
+<section class="hero">
+  <div>
+    <h1>Hi, I'm İbrahim Güler 👋</h1>
+    <p>
+      Flutter odaklı mobil uygulama geliştiricisiyim. iOS ve Android için uçtan uca,
+      production’da çalışan uygulamalar geliştirdim. Temiz mimari, performans,
+      kullanıcı deneyimi ve sürdürülebilir kod benim için öncelik.
     </p>
-  </footer>
+  </div>
+
+  <div class="terminal">
+    <p>> flutter run QuestPin</p>
+    <p>✓ iOS & Android build successful</p>
+    <p>> firebase deploy</p>
+    <p>✓ auth • firestore • storage active</p>
+    <p>> docker-compose up</p>
+    <p>✓ backend running (Go)</p>
+    <p>> system ready 🚀</p>
+  </div>
+</section>
+
+<section>
+  <h2>Technical Skills</h2>
+  <div class="skills">
+    <div class="skill-card">
+      <h3>Mobile Development</h3>
+      Flutter, Dart, responsive UI, custom widgets, Material Design, animationlar,
+      iOS & Android store süreçleri.
+    </div>
+
+    <div class="skill-card">
+      <h3>Architecture & State</h3>
+      Clean Architecture, MVC/MVP, Bloc, Provider, ChangeNotifier,
+      ölçeklenebilir state yönetimi.
+    </div>
+
+    <div class="skill-card">
+      <h3>Backend & APIs</h3>
+      RESTful API entegrasyonları, Dio & HTTP, token bazlı auth,
+      Go backend, JSON modelleme.
+    </div>
+
+    <div class="skill-card">
+      <h3>Firebase</h3>
+      Firebase Auth, Firestore, Storage, FCM, Analytics,
+      production ortamında aktif kullanım.
+    </div>
+
+    <div class="skill-card">
+      <h3>Tools & Platforms</h3>
+      Docker, Git, GitHub, Postman, Android Studio, VS Code,
+      MySQL, PostgreSQL.
+    </div>
+
+    <div class="skill-card">
+      <h3>Programming Languages</h3>
+      Dart, Go, Python, Java, C++, R, temel Assembly bilgisi.
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project">
+      <h3>📍 QuestPin</h3>
+      <span>Flutter • Firebase • iOS & Android</span>
+      <p>
+        Harita tabanlı sosyal mobil uygulama. Uçtan uca geliştirme,
+        authentication, gerçek zamanlı veri, localization ve store yayını.
+      </p>
+    </div>
+
+    <div class="project">
+      <h3>🐾 PetApp</h3>
+      <span>Flutter • Go • Docker • Firebase</span>
+      <p>
+        Production seviyesinde geliştirilen mobil uygulama.
+        Flutter frontend ve Go backend entegrasyonu.
+      </p>
+    </div>
+
+    <div class="project">
+      <h3>📦 Editable Text Widget</h3>
+      <span>Flutter Package • pub.dev</span>
+      <p>
+        pub.dev üzerinde yayınlanmış, özelleştirilebilir Flutter paketi.
+        Aktif projelerde kullanıldı.
+      </p>
+    </div>
+
+    <div class="project">
+      <h3>🎬 The Chain</h3>
+      <span>Concept Project</span>
+      <p>
+        10 anonim kullanıcının kısa videolarının zincir halinde
+        birleştirildiği sosyal deney uygulaması.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 İbrahim Güler —
+  <a href="mailto:brhmguler319@gmail.com">Email</a> ·
+  <a href="https://github.com/IbrahimGuler319" target="_blank">GitHub</a> ·
+  <a href="https://www.linkedin.com/in/ibrahim-g%C3%BCler-087826269/" target="_blank">LinkedIn</a>
+</footer>
+
 </body>
 </html>
