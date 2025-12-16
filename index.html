@@ -2,24 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Ibrahim Guler | Flutter Developer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>İbrahim Güler — Flutter Developer</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #0b0b0f;
-      --card: #14141b;
-      --accent: #00ff88;
-      --text: #eaeaea;
-      --muted: #9aa0a6;
+      --bg: #f9fafb;
+      --primary: #2563eb;
+      --text: #111827;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -29,269 +35,366 @@
       line-height: 1.6;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(11,11,15,0.9);
-      border-bottom: 1px solid var(--accent);
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(8px);
-    }
-
-    header span {
-      font-family: 'Source Code Pro', monospace;
-      color: var(--accent);
-    }
+    /* ---------- LAYOUT ---------- */
 
     section {
-      padding: 80px 40px;
-      max-width: 1200px;
-      margin: auto;
+      padding: 100px 8%;
     }
 
-    h1, h2 {
-      color: var(--accent);
+    h1, h2, h3 {
+      line-height: 1.2;
     }
 
     h2 {
-      margin-bottom: 25px;
-      font-size: 2rem;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
     }
 
-    /* HERO */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 40px;
-      align-items: center;
-      min-height: 90vh;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
+    p {
       color: var(--muted);
+    }
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .hero-text {
+      max-width: 600px;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .hero-text h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero-text span {
+      color: var(--primary);
+    }
+
+    .hero-text p {
       font-size: 1.1rem;
+      margin-bottom: 30px;
     }
 
-    .terminal {
-      background: #0f0f15;
-      border: 1px solid var(--accent);
+    .hero-buttons a {
+      display: inline-block;
+      padding: 14px 26px;
       border-radius: 10px;
-      padding: 20px;
-      font-family: 'Source Code Pro', monospace;
-      box-shadow: 0 0 20px rgba(0,255,136,0.2);
-      animation: float 4s ease-in-out infinite;
+      text-decoration: none;
+      font-weight: 600;
+      margin-right: 15px;
+      transition: all 0.3s ease;
     }
 
-    .terminal p {
-      margin: 6px 0;
-      color: #9dffcf;
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
     }
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
     }
 
-    /* SKILLS */
-    .skills {
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* ---------- SKILLS ---------- */
+
+    .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
     }
 
     .skill-card {
       background: var(--card);
-      border: 1px solid #1f1f2b;
-      border-radius: 12px;
-      padding: 20px;
-      transition: all .3s;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 25px;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .skill-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .skill-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 25px rgba(0,255,136,0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
     }
 
     .skill-card h3 {
-      color: var(--accent);
       margin-bottom: 10px;
+      color: var(--primary);
     }
 
-    /* PROJECTS */
+    /* ---------- PROJECTS ---------- */
+
     .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 25px;
+      background: #f1f5f9;
     }
 
-    .project {
+    .project-card {
       background: var(--card);
-      border-radius: 14px;
-      padding: 25px;
-      border: 1px solid #1f1f2b;
-      transition: .3s;
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
     }
 
-    .project:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 30px rgba(0,255,136,0.2);
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .project h3 {
-      color: var(--accent);
-      margin-bottom: 10px;
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.1);
     }
 
-    .project span {
-      font-size: 0.85rem;
-      color: var(--muted);
+    .project-card h3 {
+      font-size: 1.5rem;
     }
 
-    /* FOOTER */
+    .tags span {
+      display: inline-block;
+      background: #e0e7ff;
+      color: var(--primary);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      margin-right: 8px;
+    }
+
+    /* ---------- EXPERIENCE ---------- */
+
+    .timeline {
+      border-left: 3px solid var(--primary);
+      padding-left: 30px;
+    }
+
+    .timeline-item {
+      margin-bottom: 40px;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: 0.5s ease;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -41px;
+      top: 5px;
+      width: 16px;
+      height: 16px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    /* ---------- FOOTER ---------- */
+
     footer {
+      padding: 50px 8%;
       text-align: center;
-      padding: 40px;
-      border-top: 1px solid var(--accent);
-      color: var(--muted);
+      border-top: 1px solid var(--border);
     }
 
     footer a {
-      color: var(--accent);
       margin: 0 10px;
+      color: var(--primary);
       text-decoration: none;
+      font-weight: 600;
     }
+
+    /* ---------- ANIMATIONS ---------- */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- RESPONSIVE ---------- */
 
     @media (max-width: 900px) {
       .hero {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <span>ibrahimguler@portfolio:~$</span>
-  <span>Flutter Developer</span>
-</header>
-
+<!-- HERO -->
 <section class="hero">
-  <div>
-    <h1>Hi, I'm İbrahim Güler 👋</h1>
+  <div class="hero-text">
+    <h1>Hi, I'm <span>Ibrahim Guler</span></h1>
     <p>
-      Flutter odaklı mobil uygulama geliştiricisiyim. iOS ve Android için uçtan uca,
-      production’da çalışan uygulamalar geliştirdim. Temiz mimari, performans,
-      kullanıcı deneyimi ve sürdürülebilir kod benim için öncelik.
+      Flutter Developer with nearly 2 years of professional experience.
+      I build scalable, clean and production-ready mobile applications
+      using Flutter, Firebase and modern backend technologies.
     </p>
-  </div>
-
-  <div class="terminal">
-    <p>> flutter run QuestPin</p>
-    <p>✓ iOS & Android build successful</p>
-    <p>> firebase deploy</p>
-    <p>✓ auth • firestore • storage active</p>
-    <p>> docker-compose up</p>
-    <p>✓ backend running (Go)</p>
-    <p>> system ready 🚀</p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Contact Me</a>
+    </div>
   </div>
 </section>
 
+<!-- SKILLS -->
 <section>
-  <h2>Technical Skills</h2>
-  <div class="skills">
-    <div class="skill-card">
-      <h3>Mobile Development</h3>
-      Flutter, Dart, responsive UI, custom widgets, Material Design, animationlar,
-      iOS & Android store süreçleri.
-    </div>
+  <h2>Technical Expertise</h2>
 
-    <div class="skill-card">
-      <h3>Architecture & State</h3>
-      Clean Architecture, MVC/MVP, Bloc, Provider, ChangeNotifier,
-      ölçeklenebilir state yönetimi.
-    </div>
-
-    <div class="skill-card">
-      <h3>Backend & APIs</h3>
-      RESTful API entegrasyonları, Dio & HTTP, token bazlı auth,
-      Go backend, JSON modelleme.
-    </div>
-
-    <div class="skill-card">
-      <h3>Firebase</h3>
-      Firebase Auth, Firestore, Storage, FCM, Analytics,
-      production ortamında aktif kullanım.
-    </div>
-
-    <div class="skill-card">
-      <h3>Tools & Platforms</h3>
-      Docker, Git, GitHub, Postman, Android Studio, VS Code,
-      MySQL, PostgreSQL.
-    </div>
-
+  <div class="skills-grid">
     <div class="skill-card">
       <h3>Programming Languages</h3>
-      Dart, Go, Python, Java, C++, R, temel Assembly bilgisi.
+      <p>
+        Python, Java, Go, Dart, C++, R and Assembly.
+        Strong foundation in problem solving, algorithms and system-level thinking.
+      </p>
+    </div>
+
+    <div class="skill-card">
+      <h3>Mobile Development</h3>
+      <p>
+        Flutter-based cross-platform apps with clean architecture,
+        responsive UI design and smooth animations.
+      </p>
+    </div>
+
+    <div class="skill-card">
+      <h3>Backend & Tools</h3>
+      <p>
+        Dockerized Go services, Firebase ecosystem, REST APIs,
+        Git workflows, Postman testing and SQL-based data models.
+      </p>
+    </div>
+
+    <div class="skill-card">
+      <h3>Concepts & Theory</h3>
+      <p>
+        Object-Oriented Programming, Design Patterns,
+        Data Structures & Algorithms and AI fundamentals.
+      </p>
     </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <h2>Selected Projects</h2>
+
+  <div class="project-card">
+    <h3>QuestPin</h3>
+    <p>
+      A location-based exploration app where users earn XP by walking,
+      customize their avatar and interact with map-based challenges.
+    </p>
+    <div class="tags">
+      <span>Flutter</span><span>Firebase</span><span>Maps</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <h3>PetApp</h3>
+    <p>
+      Production-grade mobile app with Flutter frontend and Go backend.
+      Includes authentication, REST APIs and Dockerized services.
+    </p>
+    <div class="tags">
+      <span>Flutter</span><span>Go</span><span>Docker</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <h3>The Chain</h3>
+    <p>
+      A social experiment app where anonymous users contribute
+      short videos into a private collaborative chain.
+    </p>
+    <div class="tags">
+      <span>Flutter</span><span>Video</span><span>Social</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
 <section>
-  <h2>Projects</h2>
-  <div class="projects">
-    <div class="project">
-      <h3>📍 QuestPin</h3>
-      <span>Flutter • Firebase • iOS & Android</span>
-      <p>
-        Harita tabanlı sosyal mobil uygulama. Uçtan uca geliştirme,
-        authentication, gerçek zamanlı veri, localization ve store yayını.
-      </p>
-    </div>
+  <h2>Professional Experience</h2>
 
-    <div class="project">
-      <h3>🐾 PetApp</h3>
-      <span>Flutter • Go • Docker • Firebase</span>
+  <div class="timeline">
+    <div class="timeline-item">
+      <h3>Flutter Developer — Virtus Ar-Ge</h3>
       <p>
-        Production seviyesinde geliştirilen mobil uygulama.
-        Flutter frontend ve Go backend entegrasyonu.
-      </p>
-    </div>
-
-    <div class="project">
-      <h3>📦 Editable Text Widget</h3>
-      <span>Flutter Package • pub.dev</span>
-      <p>
-        pub.dev üzerinde yayınlanmış, özelleştirilebilir Flutter paketi.
-        Aktif projelerde kullanıldı.
-      </p>
-    </div>
-
-    <div class="project">
-      <h3>🎬 The Chain</h3>
-      <span>Concept Project</span>
-      <p>
-        10 anonim kullanıcının kısa videolarının zincir halinde
-        birleştirildiği sosyal deney uygulaması.
+        End-to-end mobile application development, Firebase integrations,
+        performance optimizations and store release processes.
       </p>
     </div>
   </div>
 </section>
 
-<footer>
-  © 2025 İbrahim Güler —
-  <a href="mailto:brhmguler319@gmail.com">Email</a> ·
-  <a href="https://github.com/IbrahimGuler319" target="_blank">GitHub</a> ·
-  <a href="https://www.linkedin.com/in/ibrahim-g%C3%BCler-087826269/" target="_blank">LinkedIn</a>
+<!-- FOOTER -->
+<footer id="contact">
+  <p>
+    © 2025 Ibrahim Guler
+  </p>
+  <div>
+    <a href="mailto:brhmguler319@gmail.com">Email</a>
+    <a href="https://github.com/IbrahimGuler319" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/ibrahim-g%C3%BCler-087826269/" target="_blank">LinkedIn</a>
+  </div>
 </footer>
+
+<!-- JS -->
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.skill-card, .project-card, .timeline-item')
+    .forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
