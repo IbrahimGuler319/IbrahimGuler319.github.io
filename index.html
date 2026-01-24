@@ -7,6 +7,7 @@
   <meta name="description" content="Mobile Software Engineer specializing in Flutter, Go, and Native Android. Creator of QuestPin.">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -21,7 +22,7 @@
       --text-primary: #fafafa;
       --text-secondary: #d6d6d6;
       --text-muted: #aaa;
-      --accent-color: #0056D2; /* CV'deki Mavi Tonuna Yakınlaştırıldı */
+      --accent-color: #0056D2; /* CV Mavi Tonu */
       --accent-hover: #0044a8;
       --shadow: 0 16px 30px hsla(0, 0%, 0%, 0.125);
       --radius: 20px;
@@ -141,7 +142,6 @@
     .about-text { flex: 1; }
     .about-text p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
 
-    /* !!! ÖNEMLİ: Buraya kendi fotoğrafını koymalısın !!! */
     .about-image {
         width: 250px;
         flex-shrink: 0;
@@ -200,6 +200,7 @@
       gap: 10px;
       transition: var(--transition);
       cursor: default;
+      height: 100px;
     }
 
     .skill-card i { font-size: 40px; transition: var(--transition); }
@@ -227,11 +228,12 @@
         text-decoration: none;
         display: flex;
         flex-direction: column;
+        height: 100%;
     }
 
     .project-img-wrapper {
         position: relative;
-        padding-top: 65%; /* Aspect ratio */
+        padding-top: 60%; /* Aspect ratio */
         background: #1a1a1a;
         border-bottom: 1px solid var(--border-color);
         overflow: hidden;
@@ -248,8 +250,8 @@
     }
 
     .project-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-    .project-title { font-size: 18px; margin-bottom: 5px; color: var(--text-primary); }
-    .project-category { font-size: 12px; color: var(--accent-color); font-weight: 600; text-transform: uppercase; margin-bottom: 10px; }
+    .project-title { font-size: 17px; margin-bottom: 5px; color: var(--text-primary); font-weight: 600; }
+    .project-category { font-size: 11px; color: var(--accent-color); font-weight: 600; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.5px; }
     .project-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 15px; }
     
     .project-stats {
@@ -259,8 +261,8 @@
         border-top: 1px solid #333;
         padding-top: 15px;
     }
-    .stat-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-muted); }
-    .stat-item ion-icon { color: var(--accent-color); }
+    .stat-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-muted); }
+    .stat-item ion-icon { color: var(--accent-color); font-size: 14px; }
 
     .project-item:hover { border-color: var(--accent-color); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
     .project-item:hover .project-img { transform: scale(1.05); }
@@ -447,37 +449,26 @@
         <h3>Tech Stack</h3>
       </div>
 
-       <div class="skills-grid">
-
+      <div class="skills-grid">
         <div class="skill-card"><i class="devicon-flutter-plain" style="color: #42A5F5;"></i><span>Flutter</span></div>
-
         <div class="skill-card"><i class="devicon-dart-plain" style="color: #0175C2;"></i><span>Dart</span></div>
-
         <div class="skill-card"><i class="devicon-go-original-wordmark" style="color: #00ADD8;"></i><span>Go (Golang)</span></div>
-
         <div class="skill-card"><i class="devicon-python-plain" style="color: #FFD43B;"></i><span>Python</span></div>
-
+        <div class="skill-card"><i class="devicon-cplusplus-plain" style="color: #00599C;"></i><span>C++</span></div>
+        <div class="skill-card"><i class="devicon-react-original" style="color: #61DAFB;"></i><span>React Native</span></div>
+        <div class="skill-card"><i class="devicon-kotlin-plain" style="color: #7F52FF;"></i><span>Kotlin</span></div>
+        <div class="skill-card"><i class="devicon-java-plain" style="color: #E76F00;"></i><span>Java</span></div>
         <div class="skill-card"><i class="devicon-firebase-plain" style="color: #FFCA28;"></i><span>Firebase</span></div>
-
         <div class="skill-card"><i class="devicon-docker-plain" style="color: #2496ED;"></i><span>Docker</span></div>
-
         <div class="skill-card"><i class="devicon-git-plain" style="color: #F05032;"></i><span>Git</span></div>
-
         <div class="skill-card"><i class="devicon-mysql-plain" style="color: #4479A1;"></i><span>MySQL</span></div>
-
-        <div class="skill-card"><i class="devicon-postman-plain" style="color: #FF6C37;"></i><span>Postman</span></div>
-
-        <div class="skill-card"><ion-icon name="cloud-download-outline" style="font-size: 40px; color: var(--text-secondary);"></ion-icon><span>REST APIs</span></div>
-
-        <div class="skill-card"><ion-icon name="layers-outline" style="font-size: 40px; color: var(--text-secondary);"></ion-icon><span>Clean Arch.</span></div>
-
-        <div class="skill-card"><ion-icon name="cube-outline" style="font-size: 40px; color: var(--text-secondary);"></ion-icon><span>State Mgmt.</span></div>
-
       </div>
-
     </article>
 
-
+    <article id="portfolio" class="page-content">
+      <header>
+        <h2>Portfolio</h2>
+      </header>
 
       <div class="portfolio-grid">
 
@@ -488,7 +479,7 @@
           <div class="project-content">
             <h3 class="project-title">QuestPin</h3>
             <p class="project-category">Flutter • Go • WebSockets</p>
-            <p class="project-desc">Geo-social platform where users interact via location-based pins. Features real-time feeds and complex map interactions.</p>
+            <p class="project-desc">Geo-social platform featuring real-time feeds and complex map interactions.</p>
             <div class="project-stats">
                 <div class="stat-item"><ion-icon name="cloud-download-outline"></ion-icon> 5000+ Downloads</div>
                 <div class="stat-item"><ion-icon name="star-outline"></ion-icon> 4.5 Rating</div>
@@ -501,13 +492,9 @@
             <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop" class="project-img" alt="Collaboration App">
           </div>
           <div class="project-content">
-            <h3 class="project-title">Real-Time Collaboration Suite</h3>
-            <p class="project-category">Flutter Desktop • Go Fiber</p>
-            <p class="project-desc">Desktop tool for shared virtual rooms. Handles low-latency signaling using WebSockets and a scalable Go backend deployed on Render.</p>
-             <div class="project-stats">
-                <div class="stat-item"><ion-icon name="desktop-outline"></ion-icon> Desktop App</div>
-                <div class="stat-item"><ion-icon name="flash-outline"></ion-icon> Low Latency</div>
-            </div>
+            <h3 class="project-title">Real-Time Collab.</h3>
+            <p class="project-category">Flutter Desktop • Go</p>
+            <p class="project-desc">Desktop tool for shared virtual rooms with low-latency signaling via WebSockets.</p>
           </div>
         </a>
 
@@ -518,7 +505,7 @@
           <div class="project-content">
             <h3 class="project-title">PetApp Ecosystem</h3>
             <p class="project-category">Full Stack • Flutter • Docker</p>
-            <p class="project-desc">Full-stack solution with a custom Go backend. Implemented secure auth flows and containerized services using Docker.</p>
+            <p class="project-desc">Full-stack solution with custom Go backend, Auth flows and Dockerized services.</p>
           </div>
         </a>
 
@@ -529,7 +516,51 @@
           <div class="project-content">
             <h3 class="project-title">Editable Text Widget</h3>
             <p class="project-category">Open Source (pub.dev)</p>
-            <p class="project-desc">Reusable Flutter package focused on clean API design and developer experience. Published for the community.</p>
+            <p class="project-desc">Reusable Flutter package focused on clean API design and developer experience.</p>
+          </div>
+        </a>
+
+        <a href="#" class="project-item">
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=600&auto=format&fit=crop" class="project-img" alt="Sports App">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Sports Buddy Finder</h3>
+            <p class="project-category">Native Android (Java)</p>
+            <p class="project-desc">Native app to find sports partners. Implemented matching algorithms and chat.</p>
+          </div>
+        </a>
+
+        <a href="#" class="project-item">
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=600&auto=format&fit=crop" class="project-img" alt="Medical App">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Allerview Diagnosis</h3>
+            <p class="project-category">Native Android (Java)</p>
+            <p class="project-desc">Camera-based medical diagnosis interface focused on image processing.</p>
+          </div>
+        </a>
+
+         <a href="#" class="project-item">
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" class="project-img" alt="Stock App">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Stock Management</h3>
+            <p class="project-category">Native Android (Kotlin)</p>
+            <p class="project-desc">Inventory tracking system with local database integration and reporting features.</p>
+          </div>
+        </a>
+
+         <a href="#" class="project-item">
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=600&auto=format&fit=crop" class="project-img" alt="Card Scanner">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Card Scanner</h3>
+            <p class="project-category">Flutter • OCR</p>
+            <p class="project-desc">Utility app for digitizing business cards using Optical Character Recognition (OCR).</p>
           </div>
         </a>
 
@@ -543,7 +574,7 @@
 
       <div class="map-box">
         <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.0!2d28.36!3d37.21!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bf73!2sMugla!5e0!3m2!1sen!2str!4v1600000000000"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50950.48518880665!2d28.33744654060803!3d37.21556093630636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bf7329759d54c7%3A0x628045610ec1f2f8!2zM8SxxL9sYSwgTXXEn2xhIE1lcmtlei9NxLHEn2xh!5e0!3m2!1str!2str!4v1703608245362!5m2!1str!2str"
                 width="100%"
                 height="100%"
                 style="border:0; filter: grayscale(1) invert(1);"
